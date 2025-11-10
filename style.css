@@ -1,0 +1,63 @@
+/* estilo pensado para pantalla 800x480 y tinta-e */
+:root{
+  --bg:#000;
+  --ink:#fff;
+  --green-bg:#0a5f2e;
+  --red-bg:#7a0010;
+  --muted:#cfcfcf;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Arial,sans-serif}
+
+#grid{
+  width:800px;
+  height:480px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-template-rows: repeat(2,1fr);
+  gap:0;
+  background: #000;
+}
+
+.card{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding:8px;
+  overflow:hidden;
+  border:1px solid #111;
+}
+
+/* fondo degradado tenue por tarjeta (puedes cambiar imagenes usando background-image) */
+.card::before{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom right, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+  z-index:0;
+}
+
+/* meta contiene símbolo y precio */
+.meta{position:relative;z-index:1;width:100%;display:flex;justify-content:space-between;align-items:center;padding:0 6px}
+.symbol{font-size:14px;opacity:0.95}
+.price{font-size:20px;font-weight:700}
+
+/* canvas gráfico */
+.card .chart{position:relative;z-index:1;width:100%;height:70%;}
+
+/* colores para sube/baja (fondo del card) */
+.card.up{background:linear-gradient(180deg,#0d3b21, #0a5f2e)}
+.card.down{background:linear-gradient(180deg,#4b0b0b,#7a0010)}
+.card.neutral{background:linear-gradient(180deg,#222,#333)}
+
+.price.up{color:#cffff2}
+.price.down{color:#ffd6d6}
+.price.neutral{color:var(--muted)}
+
+/* tip pequeño para e-ink contraste */
+@media (max-width:900px){
+  #grid{transform:scale(1);width:100vw;height:100vh}
+}
